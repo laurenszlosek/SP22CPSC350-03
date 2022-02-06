@@ -1,6 +1,6 @@
 /*
 @file prices.cpp
-@brief C++ program to
+@brief C++ program to add user imput prices
 @author Lauren Szlosek
 */
 #include <iostream>
