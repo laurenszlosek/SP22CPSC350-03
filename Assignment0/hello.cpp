@@ -1,3 +1,6 @@
+/*
+prints "hello"
+*/
 #include <iostream>
 
 int main(){
