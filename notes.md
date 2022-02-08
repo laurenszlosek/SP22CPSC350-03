@@ -17,4 +17,6 @@
 ###### int* array;
 ###### int size = 5;
 ###### array = new int[size];
+###### delete[] array;
 ######
+###### free up memory once the array is done
