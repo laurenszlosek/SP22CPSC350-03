@@ -1,3 +1,8 @@
+/*
+@file Parser.h
+@brief header file for Parser class
+@author Lauren Szlosek
+*/
 #ifndef PARSER_H
 #define PARSER_H
 class Parser

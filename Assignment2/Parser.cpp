@@ -1,139 +1,156 @@
+/*
+@file Parser.cpp
+@brief Parser class to sort user's string and output to a file
+@author Lauren Szlosek
+*/
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <ctype.h>
+#include <stdio.h>
 #include "Parser.h"
-
+/*
+Parser
+Constructor
+*/
 Parser::Parser(){}
-
+/*
+sortString()
+Counts the amount of each letter in user's string
+@param string s, user's imput
+*/
 void Parser::sortString(std::string s){
   userString = s;
   for (int i = 0; i < s.length(); i++){
-    if (s[i] == 'a'){
+    char c = s[i];
+    //tolower(c);
+    //std::cout << "lower: " << c << std::endl;
+    if (tolower(c) == 'a'){
       countA += 1;
       countTotal += 1;
       //std::cout << "CountA: " << countA << std::endl;
     }
-    else if (s[i] == 'b'){
+    else if (tolower(c) == 'b'){
       countB += 1;
       countTotal += 1;
       //std::cout << "CountB: " << countB << std::endl;
     }
-    else if (s[i] == 'c'){
+    else if (tolower(c) == 'c'){
       countC += 1;
       countTotal += 1;
       //std::cout << "CountC: " << countC << std::endl;
     }
-    else if (s[i] == 'd'){
+    else if (tolower(c) == 'd'){
       countD += 1;
       countTotal += 1;
       //std::cout << "CountD: " << countD << std::endl;
     }
-    else if (s[i] == 'e'){
+    else if (tolower(c) == 'e'){
       countE += 1;
       countTotal += 1;
       //std::cout << "CountE: " << countE << std::endl;
     }
-    else if (s[i] == 'f'){
+    else if (tolower(c) == 'f'){
       countF += 1;
       countTotal += 1;
       //std::cout << "CountF: " << countF << std::endl;
     }
-    else if (s[i] == 'g'){
+    else if (tolower(c) == 'g'){
       countG += 1;
       countTotal += 1;
       //std::cout << "CountG: " << countG << std::endl;
     }
-    else if (s[i] == 'h'){
+    else if (tolower(c) == 'h'){
       countH += 1;
       countTotal += 1;
       //std::cout << "CountH: " << countH << std::endl;
     }
-    else if (s[i] == 'i'){
+    else if (tolower(c) == 'i'){
       countI += 1;
       countTotal += 1;
       //std::cout << "CountI: " << countI << std::endl;
     }
-    else if (s[i] == 'j'){
+    else if (tolower(c) == 'j'){
       countJ += 1;
       countTotal += 1;
       //std::cout << "CountJ: " << countJ << std::endl;
     }
-    else if (s[i] == 'k'){
+    else if (tolower(c) == 'k'){
       countK += 1;
       countTotal += 1;
       //std::cout << "CountK: " << countK << std::endl;
     }
-    else if (s[i] == 'l'){
+    else if (tolower(c) == 'l'){
       countL += 1;
       countTotal += 1;
       //std::cout << "CountL: " << countL << std::endl;
     }
-    else if (s[i] == 'm'){
+    else if (tolower(c) == 'm'){
       countM += 1;
       countTotal += 1;
       //std::cout << "CountM: " << countM << std::endl;
     }
-    else if (s[i] == 'n'){
+    else if (tolower(c) == 'n'){
       countN += 1;
       countTotal += 1;
       //std::cout << "CountN: " << countN << std::endl;
     }
-    else if (s[i] == 'o'){
+    else if (tolower(c) == 'o'){
       countO += 1;
       countTotal += 1;
       //std::cout << "CountO: " << countO << std::endl;
     }
-    else if (s[i] == 'p'){
+    else if (tolower(c) == 'p'){
       countP += 1;
       countTotal += 1;
       //std::cout << "CountP: " << countP << std::endl;
     }
-    else if (s[i] == 'q'){
+    else if (tolower(c) == 'q'){
       countQ += 1;
       countTotal += 1;
       //std::cout << "CountQ: " << countQ << std::endl;
     }
-    else if (s[i] == 'r'){
+    else if (tolower(c) == 'r'){
       countR += 1;
       countTotal += 1;
       //std::cout << "CountR: " << countR << std::endl;
     }
-    else if (s[i] == 's'){
+    else if (tolower(c) == 's'){
       countS += 1;
       countTotal += 1;
       //std::cout << "CountS: " << countS << std::endl;
     }
-    else if (s[i] == 't'){
+    else if (tolower(c) == 't'){
       countT += 1;
       countTotal += 1;
       //std::cout << "CountT: " << countT << std::endl;
     }
-    else if (s[i] == 'u'){
+    else if (tolower(c) == 'u'){
       countU += 1;
       countTotal += 1;
       //std::cout << "CountU: " << countU << std::endl;
     }
-    else if (s[i] == 'v'){
+    else if (tolower(c) == 'v'){
       countV += 1;
       countTotal += 1;
       //std::cout << "CountV: " << countV << std::endl;
     }
-    else if (s[i] == 'w'){
+    else if (tolower(c) == 'w'){
       countW += 1;
       countTotal += 1;
       //std::cout << "CountW: " << countW << std::endl;
     }
-    else if (s[i] == 'x'){
+    else if (tolower(c) == 'x'){
       countX += 1;
       countTotal += 1;
       //std::cout << "CountX: " << countX << std::endl;
     }
-    else if (s[i] == 'y'){
+    else if (tolower(c) == 'y'){
       countY += 1;
       countTotal += 1;
       //std::cout << "CountY: " << countY << std::endl;
     }
-    else if (s[i] == 'z'){
+    else if (tolower(c) == 'z'){
       countZ += 1;
       countTotal += 1;
       //std::cout << "CountZ: " << countZ << std::endl;
@@ -144,7 +161,10 @@ void Parser::sortString(std::string s){
   }
   return;
 }
-
+/*
+findPairs()
+finds duplicate letters in a row
+=*/
 void Parser::findPairs(){
   for (int i = 0; i < userString.length(); i++){
     if (userString[i] == userString[i+1]){
@@ -152,7 +172,10 @@ void Parser::findPairs(){
     }
   }
 }
-
+/*
+saveToFile()
+prints content into output file
+*/
 void Parser::saveToFile(){
   std::ofstream file;
   file.open("output.txt");
