@@ -1,3 +1,8 @@
+/*
+@file FileProcessor.cpp
+@brief FileProcessor class to read from one file and write to another
+@author Lauren Szlosek
+*/
 #include "FileProcessor.h"
 #include "Translator.h"  // Since I create an object of the Translator class, I have to include the Translator header file here
 #include <fstream>

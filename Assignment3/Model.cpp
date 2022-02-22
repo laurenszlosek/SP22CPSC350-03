@@ -1,3 +1,8 @@
+/*
+@file Model.cpp
+@brief Model class to translate each character
+@author Lauren Szlosek
+*/
 #include "Model.h"
 #include <iostream>
 #include <string>
@@ -11,7 +16,6 @@ Model::Model(){}
 Model::~Model(){}
 
 string Model::translateStringCharacter(char c){
-  // add code to translate each letter
   string transChar;
   bool isCaptalized = false;
   if (isupper(c)){
@@ -196,7 +200,5 @@ string Model::translateDoubleCharacter(char c){
     transChar[0] = toupper(transChar[0]);
     //cout << "after: "<< transChar[0] << endl;
   }
-  // if vowel -> add prefix "squat" then repeat vowel "oo" becomes "squato"
-  // if consonant -> add prefix "squa" then converted consonant "ll" becomes "squatlul"
   return transChar;
 }

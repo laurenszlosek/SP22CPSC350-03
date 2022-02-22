@@ -1,4 +1,8 @@
-
+/*
+@file Translator.h
+@brief header file for Translator class
+@author Lauren Szlosek
+*/
 using namespace std;
 #include <string>
 

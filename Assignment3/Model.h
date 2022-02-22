@@ -1,4 +1,8 @@
-
+/*
+@file Model.h
+@brief header file for Model class
+@author Lauren Szlosek
+*/
 using namespace std;
 #include <string>
 

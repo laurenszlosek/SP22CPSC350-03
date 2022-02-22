@@ -1,3 +1,8 @@
+/*
+@file FileProcessor.h
+@brief header file for FileProcessor class
+@author Lauren Szlosek
+*/
 #include <string>
 using namespace std;
 

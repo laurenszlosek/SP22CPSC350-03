@@ -1,3 +1,8 @@
+/*
+@file mainprogram.cpp
+@brief mainprogram asks user for input and output file names to translate into Tutnese
+@author Lauren Szlosek
+*/
 #include "FileProcessor.h"
 #include <iostream>
 using namespace std;

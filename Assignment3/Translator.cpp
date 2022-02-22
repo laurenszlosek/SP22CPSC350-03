@@ -1,3 +1,8 @@
+/*
+@file Translator.cpp
+@brief Translator class to translate words and sentences
+@author Lauren Szlosek
+*/
 #include "Translator.h"
 #include "Model.h" // Since I create an object of the Model class, I have to include the Model header file here
 #include <iostream>
