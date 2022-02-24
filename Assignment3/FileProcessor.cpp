@@ -8,11 +8,21 @@
 #include <fstream>
 #include <iostream>
 using namespace std;
-
+/*
+FileProcessor()
+constructor
+*/
 FileProcessor::FileProcessor(){}
-
+/*
+~FileProcessor()
+destructor
+*/
 FileProcessor::~FileProcessor(){}
-
+/*
+processFile()
+Reads content from input file, translates the content into Tutnese, writes translatiion into output file
+@param string inputfile, string outputfile, the input and output file names
+*/
 void FileProcessor::processFile(string inputName, string outputName){
   string line;
   ifstream inputFile;

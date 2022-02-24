@@ -6,11 +6,27 @@
 #include "Translator.h"
 #include "Model.h" // Since I create an object of the Model class, I have to include the Model header file here
 #include <iostream>
-
+/*
+Translator()
+constructor
+*/
 Translator::Translator(){}
-
+/*
+~Translator()
+destructor
+*//*
+translateEnglishWord()
+iterates over word to translate into Tutnese
+@param string s, word being translated
+@return string,  translated word
+*/
 Translator::~Translator(){}
-
+/*
+translateEnglishWord()
+iterates over word to translate into Tutnese
+@param string s, word being translated
+@return string,  translated word
+*/
 string Translator::translateEnglishWord(string word){
   // here check each letter of word
   string transWord = "";
@@ -28,13 +44,18 @@ string Translator::translateEnglishWord(string word){
   }
   return transWord;
 }
-
+/*
+translateEnglishSentence()
+iterates over sentence to translate into Tutnese
+@param string s, sentence being translated
+@return string,  translated sentence
+*/
 string Translator::translateEnglishSentence(string sent){
   string word = "";
   string punct = "";
   string fullSentence = "";
   for (int i = 0; i <= sent.length(); i++){
-    if ((sent[i] == ' ') || (sent[i] =='.') || (sent[i] =='?') || (sent[i] ==',') || (sent[i] =='!') || (i == sent.length())){
+    if ((sent[i] == ' ') || (sent[i] =='.') || (sent[i] =='?') || (sent[i] ==',') || (sent[i] ==';') ||(sent[i] =='"') || (sent[i] =='\n') || (sent[i] =='!') || (i == sent.length())){
       punct = sent[i];
       fullSentence += translateEnglishWord(word);
       fullSentence += sent[i];

@@ -10,11 +10,22 @@
 #include <stdio.h>
 
 using namespace std;
-
+/*
+Model()
+constructor
+*/
 Model::Model(){}
-
+/*
+~Model()
+destructor
+*/
 Model::~Model(){}
-
+/*
+translateStringCharacter()
+translate single character into Tutnese
+@param character c, letter being translated
+@return string, translated letter
+*/
 string Model::translateStringCharacter(char c){
   string transChar;
   bool isCaptalized = false;
@@ -108,7 +119,12 @@ string Model::translateStringCharacter(char c){
   }
   return transChar;
 }
-
+/*
+translateDoubleCharacter()
+translate repeated character into Tutnese
+@param character c, letter being translated
+@return string, translated letter
+*/
 string Model::translateDoubleCharacter(char c){
   string transChar;
   bool isCaptalized = false;
