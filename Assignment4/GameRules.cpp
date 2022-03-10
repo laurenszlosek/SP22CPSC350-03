@@ -16,7 +16,7 @@ constructor
 */
 GameRules::GameRules() : gameRows(rowDefault), gameCols(colDefault), genCount(genDefault){
   cout << endl;
-  askUser();
+  //askUser();
   playGame();
 }
 /*
@@ -31,6 +31,20 @@ GameRules::~GameRules(){
   }
   delete[] userInputGrid;
   userInputGrid = nullptr;
+}
+
+void GameRules::playGame(){
+  askUser();
+  initializeWorkingGrid();
+  if (gameMode == 1){
+    playClassicMode();
+  }else if (gameMode == 2){
+    playDonutMode();
+  }else if (gameMode == 3){
+    playMirrorMode();
+  } else{
+    cout << "Error: No Game Mode Entered" << endl;
+  }
 }
 
 void GameRules::initializeGrid(){
@@ -121,7 +135,6 @@ void GameRules::gridFromUserFile(string userImput){
   if (!userFileName.is_open()){
     std::cout << "Error with Input File Name." << std::endl;
   }
-
   getline(userFileName,lineOne);
   this->gameRows = stoi(lineOne); //https://www.freecodecamp.org/news/string-to-int-in-c-how-to-convert-a-string-to-an-integer-example/#:~:text=One%20effective%20way%20to%20convert,the%20integer%20version%20of%20it.
   getline(userFileName,lineTwo);
@@ -131,8 +144,10 @@ void GameRules::gridFromUserFile(string userImput){
   for (int i = 0; i < gameRows-1; i++){
     getline(userFileName,userGrid);
     for (int j = 0; j < gameCols-1; j++){
-      this->userInputGrid[i+1][j+1]=  userGrid[j];
+      this->userInputGrid[i+1][j+1] =  userGrid[j];
+      //cout << this->userInputGrid[i][j] << i << j << " ";
     }
+    //cout << endl;
   }
   printGrid();
 }
@@ -185,19 +200,6 @@ string GameRules::gridFromPercentage(){
   return fileName;
 }
 
-void GameRules::playGame(){
-  initializeWorkingGrid();
-  if (gameMode == 1){
-    playClassicMode();
-  }else if (gameMode == 2){
-    playDonutMode();
-  }else if (gameMode == 3){
-    playMirrorMode();
-  } else{
-    cout << "Error: No Game Mode Entered" << endl;
-  }
-}
-
 void GameRules::playClassicMode(){
   int genCount = 1;
   bool isStable;
@@ -217,7 +219,7 @@ void GameRules::playClassicMode(){
     printGrid();
     if (isStable){
       cout << "------------------- " << endl;
-      cout << "Life is Stable" << endl;
+      cout << "Game Over" << endl;
       cout << "------------------- " << endl;
       cout << endl;
       cout << "Click Enter to End Game" << endl;
@@ -229,14 +231,82 @@ void GameRules::playClassicMode(){
 }
 
 void GameRules::playDonutMode(){
-  cout << "DONUT MODE" << endl;
+  bool isStable;
+  for (int i = 0; i < gameRows; i++){
+    for(int j = 0; j < gameCols; j++){
+      if (this->userInputGrid[i][j] == 'X'){
+        this->userInputGrid[0][j] = 'X';
+        this->userInputGrid[i][0] = 'X';
+      }
+    }
+  }
+  while (true){
+    for (int i = 1; i < gameRows-1; i++){
+      for(int j = 1; j < gameCols-1; j++){
+        checkNeighbors(i,j);
+      }
+    }
+    isStable = isGameStable();
+    //cout << "Generation: " << genCount << endl;
+    for (int i = 0; i < gameRows; i++){
+      for(int j = 0; j < gameCols; j++){
+        this->userInputGrid[i][j] = this->workingGameGrid[i][j];
+      }
+    }
+    printGrid();
+    if (isStable){
+      cout << "------------------- " << endl;
+      cout << "Game Over" << endl;
+      cout << "------------------- " << endl;
+      cout << endl;
+      cout << "Click Enter to End Game" << endl;
+      cout << endl;
+      cin.ignore();
+      break;
+    }
+  }
 }
 
 void GameRules::playMirrorMode(){
-  cout << "MIRROR MODE" << endl;
+  bool isStable;
+  for (int i = 0; i < gameRows; i++){
+    for(int j = 0; j < gameCols; j++){
+       if ((this->userInputGrid[i][j] == 'V') && ((i == 1)||(i == gameRows-1)||(j==1)||(j==gameCols-1))){
+        cout << "V" << i << j << endl;
+        this->userInputGrid[0][j] = 'X';
+        this->userInputGrid[i][0] = 'X';
+      }
+    }
+  }
+  while (true){
+    for (int i = 1; i < gameRows-1; i++){
+      for(int j = 1; j < gameCols-1; j++){
+        checkNeighbors(i,j);
+      }
+    }
+    isStable = isGameStable();
+    //cout << "Generation: " << genCount << endl;
+    for (int i = 0; i < gameRows; i++){
+      for(int j = 0; j < gameCols; j++){
+        this->userInputGrid[i][j] = this->workingGameGrid[i][j];
+      }
+    }
+    printGrid();
+    if (isStable){
+      cout << "------------------- " << endl;
+      cout << "Game Over" << endl;
+      cout << "------------------- " << endl;
+      cout << endl;
+      cout << "Click Enter to End Game" << endl;
+      cout << endl;
+      cin.ignore();
+      break;
+    }
+  }
 }
 
 void GameRules::checkNeighbors(int i, int j){
+
   int neighborCounter = 0;
     if (this->userInputGrid[i-1][j-1] == 'X'){
       neighborCounter++;
@@ -265,14 +335,17 @@ void GameRules::checkNeighbors(int i, int j){
     } else if (neighborCounter >= 4){
       this->workingGameGrid[i][j] = '-'; //overcrowded
     }
-    for (int i = 0; i < gameRows;i++){
-      for(int j = 0; j < gameCols; j++){
-      }
-    }
+    // cout << "filling work: " << genCount << endl;
+    // for (int i = 1; i < gameRows-1; i++){
+    //   for(int j = 1; j < gameCols-1; j++){
+    //     cout << this->workingGameGrid[i][j];
+    //   }
+    //   cout << endl;
+    // }
 }
 
 void GameRules::printGrid(){
-
+  ofstream userOutputFile;
   if (gameRes == 1){
     cout << "Generation: " << genCount << endl;
     for (int i = 1; i < gameRows-1; i++){
@@ -287,7 +360,7 @@ void GameRules::printGrid(){
     genCount++;
   }
   if (gameRes == 2){
-    ofstream userOutputFile;
+
     userOutputFile.open(outputFile, fstream::app);
     userOutputFile << "Generation: " << genCount << endl;
     for (int i = 1; i < gameRows-1; i++){
@@ -296,9 +369,10 @@ void GameRules::printGrid(){
       }
       userOutputFile << endl;
     }
-    userOutputFile.close();
+
     genCount++;
   }
+  userOutputFile.close();
 }
 
 bool GameRules::isGameStable(){
