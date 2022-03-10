@@ -8,8 +8,5 @@
 #include "GameRules.h"
 int main(){
   GameRules game;
-
-  cout << "main program" << endl;
-
   return 0;
 }

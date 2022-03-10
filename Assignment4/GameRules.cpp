@@ -1,9 +1,8 @@
 /*
-@file Game.cpp
-@brief
+@file GameRules.cpp
+@brief Implements the Game of Life
 @author Lauren Szlosek
 */
-//#include "FileProcessor.h"
 #include "GameRules.h"
 #include <fstream>
 #include <iostream>
@@ -11,7 +10,7 @@
 #include <stdlib.h>
 using namespace std;
 /*
-FileProcessor()
+GameRules()
 constructor
 */
 GameRules::GameRules() : gameRows(rowDefault), gameCols(colDefault), genCount(genDefault){
@@ -20,11 +19,10 @@ GameRules::GameRules() : gameRows(rowDefault), gameCols(colDefault), genCount(ge
   playGame();
 }
 /*
-~FileProcessor()
+~GameRules()
 destructor
 */
 GameRules::~GameRules(){
-  cout << "Destructor Called" << endl;
   for (int iRow = 0; iRow < this->gameRows; iRow++)
   {
     delete[] userInputGrid[iRow];
@@ -32,7 +30,11 @@ GameRules::~GameRules(){
   delete[] userInputGrid;
   userInputGrid = nullptr;
 }
-
+/*
+playGame()
+causes game play
+calls the functions to play each game mode
+*/
 void GameRules::playGame(){
   askUser();
   initializeWorkingGrid();
@@ -46,7 +48,10 @@ void GameRules::playGame(){
     cout << "Error: No Game Mode Entered" << endl;
   }
 }
-
+/*
+initializeGrid()
+initializes grid of pointers
+*/
 void GameRules::initializeGrid(){
   this->gameRows+=2;
   this->gameCols+=2;
@@ -64,7 +69,10 @@ void GameRules::initializeGrid(){
 
 	return;
 }
-
+/*
+initializeWorkingGrid()
+ititializes second grid for game play
+*/
 void GameRules::initializeWorkingGrid(){
   this->workingGameGrid = new char* [this->gameRows];
   for (int iRow = 0; iRow < this->gameRows; iRow++){
@@ -79,7 +87,10 @@ void GameRules::initializeWorkingGrid(){
 	}
 	return;
 }
-
+/*
+askUser()
+prints out statements for user to pick game play settings
+*/
 void GameRules::askUser(){
   char userAns;
   string userGameGrid;
@@ -117,16 +128,24 @@ void GameRules::askUser(){
     cout << "------------------- " << endl;
     cin >> userFile;
     cout << endl;
-    gridFromUserFile(userFile);
+    gridFromFile(userFile);
   } else if ((userAns == 'N') || (userAns == 'n')){
     string randFile;
-    randFile = gridFromPercentage();
-    gridFromUserFile(randFile);
+    randFile = fileFromPercentage();
+    gridFromFile(randFile);
+  } else {
+    cout <<  endl;
+    cout << "No answer provided. Game Over. " << endl;
+    cout <<  endl;
   }
   return;
 }
-
-void GameRules::gridFromUserFile(string userImput){
+/*
+gridFromFile()
+fills the grid based off of file parameter
+@param string userImput, file being read
+*/
+void GameRules::gridFromFile(string userImput){
   ifstream userFileName;
   string lineOne;
   string lineTwo;
@@ -145,14 +164,16 @@ void GameRules::gridFromUserFile(string userImput){
     getline(userFileName,userGrid);
     for (int j = 0; j < gameCols-1; j++){
       this->userInputGrid[i+1][j+1] =  userGrid[j];
-      //cout << this->userInputGrid[i][j] << i << j << " ";
     }
-    //cout << endl;
   }
   printGrid();
 }
-
-string GameRules::gridFromPercentage(){
+/*
+fileFromPercentage()
+creates file based off of imputs from user
+@return string, name of file
+*/
+string GameRules::fileFromPercentage(){
   ofstream generatedFile;
   int userRows;
   int userCols;
@@ -161,7 +182,7 @@ string GameRules::gridFromPercentage(){
   int numFilled;
   int randNum;
   string fileName = "generatedFile.txt";
-  generatedFile.open(fileName);//https://stackoverflow.com/questions/4155537/writing-into-a-text-file-without-overwriting-it
+  generatedFile.open(fileName);
   cout << "------------------- " << endl;
   cout << "Enter amount of rows: " << endl;
   cout << "------------------- " << endl;
@@ -199,7 +220,10 @@ string GameRules::gridFromPercentage(){
   generatedFile.close();
   return fileName;
 }
-
+/*
+playClassicMode()
+plays classic mode
+*/
 void GameRules::playClassicMode(){
   int genCount = 1;
   bool isStable;
@@ -229,11 +253,14 @@ void GameRules::playClassicMode(){
     }
   }
 }
-
+/*
+playDonutMode()
+plays donut mode
+*/
 void GameRules::playDonutMode(){
   bool isStable;
-  for (int i = 0; i < gameRows; i++){
-    for(int j = 0; j < gameCols; j++){
+  for (int i = 0; i < gameRows; i++){ // maybe <
+    for(int j = 0; j < gameCols; j++){ // maybe <
       if (this->userInputGrid[i][j] == 'X'){
         this->userInputGrid[0][j] = 'X';
         this->userInputGrid[i][0] = 'X';
@@ -266,12 +293,15 @@ void GameRules::playDonutMode(){
     }
   }
 }
-
+/*
+playMirrorMode()
+plays mirror mode
+*/
 void GameRules::playMirrorMode(){
   bool isStable;
   for (int i = 0; i < gameRows; i++){
     for(int j = 0; j < gameCols; j++){
-       if ((this->userInputGrid[i][j] == 'V') && ((i == 1)||(i == gameRows-1)||(j==1)||(j==gameCols-1))){
+       if ((this->userInputGrid[i][j] == 'V') && ((i == 1)||(i == gameRows-2)||(j==1)||(j==gameCols-2))){
         cout << "V" << i << j << endl;
         this->userInputGrid[0][j] = 'X';
         this->userInputGrid[i][0] = 'X';
@@ -304,9 +334,12 @@ void GameRules::playMirrorMode(){
     }
   }
 }
-
+/*
+checkNeighbors()
+iteraties over grid and checks for the rules of the game of life
+@param int i, int j, position of grid that's being checked
+*/
 void GameRules::checkNeighbors(int i, int j){
-
   int neighborCounter = 0;
     if (this->userInputGrid[i-1][j-1] == 'X'){
       neighborCounter++;
@@ -335,15 +368,11 @@ void GameRules::checkNeighbors(int i, int j){
     } else if (neighborCounter >= 4){
       this->workingGameGrid[i][j] = '-'; //overcrowded
     }
-    // cout << "filling work: " << genCount << endl;
-    // for (int i = 1; i < gameRows-1; i++){
-    //   for(int j = 1; j < gameCols-1; j++){
-    //     cout << this->workingGameGrid[i][j];
-    //   }
-    //   cout << endl;
-    // }
 }
-
+/*
+printGrid)
+prints out grid for each generation
+*/
 void GameRules::printGrid(){
   ofstream userOutputFile;
   if (gameRes == 1){
@@ -374,7 +403,11 @@ void GameRules::printGrid(){
   }
   userOutputFile.close();
 }
-
+/*
+isGameStable()
+checks to see if the generations are stable
+@return bool, game is either stable or not
+*/
 bool GameRules::isGameStable(){
   bool isStable = true;
   for (int i = 1; i < gameRows-1; i++){

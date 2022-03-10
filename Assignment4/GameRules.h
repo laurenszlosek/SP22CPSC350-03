@@ -25,8 +25,8 @@ public:
 private:
   void askUser();
   void initializeGrid();
-  void gridFromUserFile(string userImput);
-  string gridFromPercentage();
+  void gridFromFile(string userImput);
+  string fileFromPercentage();
   void playGame();
   void playClassicMode();
   void playDonutMode();
