@@ -24,6 +24,6 @@ public:
   bool operator!=(const Student& eq) const;
   bool operator<(const Student& eq) const;
   bool operator>(const Student& eq) const;
-  int getNum();
+  int getStudentID();
   void print();
 };

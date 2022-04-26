@@ -31,6 +31,23 @@ Faculty::Faculty(int id, string name, string level, string dep){
   facDepartment = dep;
 }
 
+bool Faculty::operator==(const Faculty& eq) const {
+  return (facID ==  eq.facID);
+}
+bool Faculty::operator!=(const Faculty& eq) const {
+  return (facID !=  eq.facID);
+}
+bool Faculty::operator>(const Faculty& eq) const {
+  return (facID >  eq.facID);
+}
+bool Faculty::operator<(const Faculty& eq) const {
+  return (facID <  eq.facID);
+}
+
+int Faculty::getFacultyID(){
+  return facID;
+}
+
 void Faculty::print(){
   cout << facID << endl;
   cout << facName << endl;

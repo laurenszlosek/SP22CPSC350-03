@@ -48,8 +48,8 @@ bool Student::operator<(const Student& eq) const {
   return (studentAdvisorID <  eq.studentAdvisorID);
 }
 
-int Student::getNum(){
-  return studentAdvisorID;
+int Student::getStudentID(){
+  return studentID;
 }
 
 void Student::print(){
