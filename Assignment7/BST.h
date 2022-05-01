@@ -2,6 +2,7 @@
 
 #include "TreeNode.h"
 #include <iostream>
+#include <string>
 
 template <typename E>
 class BST{
@@ -254,7 +255,8 @@ void BST<E>::inOrder(TreeNode<E>* node){
   if(node == nullptr)
     return ;
   inOrder(node->left);
-  std::cout << node->key << "-";
+  //std::cout << node->key << ":";
+  node->value.print();
   inOrder(node->right);
 }
 

@@ -4,9 +4,8 @@
 @author Lauren Szlosek
 */
 #include <string>
-#include "Alist.h"
+#include <list>
 using namespace std;
-
 
 class Faculty{
 private:
@@ -14,7 +13,8 @@ private:
   string facName;
   string facLevel;
   string facDepartment;
-  //Alist<int> adviseeID; //and	a list of integers corresponding to all the faculty member’s advisees’ ids.
+  list<int> myList;
+  //List<Object> list = new LinkedList<Object>();
 public:
   Faculty();
   ~Faculty();
@@ -25,4 +25,8 @@ public:
   bool operator>(const Faculty& eq) const;
   int getFacultyID();
   void print();
+  void addAdvisees(int i);
+  int getAdviseesID(int i);
+  int numOfStudents();
+  void removeAdviseesID(int i);
 };

@@ -6,7 +6,6 @@
 #include <string>
 using namespace std;
 
-
 class Student{
 private:
   int studentID;
@@ -25,5 +24,7 @@ public:
   bool operator<(const Student& eq) const;
   bool operator>(const Student& eq) const;
   int getStudentID();
+  int getAdvisorID();
+  void setAdvisor(int i);
   void print();
 };
