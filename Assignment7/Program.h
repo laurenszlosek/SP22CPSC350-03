@@ -8,7 +8,6 @@
 #include "Faculty.h"
 using namespace std;
 
-
 class Program{
 public:
   BST<Student> stuBST;
